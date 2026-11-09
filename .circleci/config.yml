@@ -1,0 +1,1671 @@
+version: 2.1
+
+jobs:
+  namespaceStr:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Phase 31
+          command: |
+            mkdir -p /tmp/yarn
+            set +o pipefail 2>/dev/null; dd if=/dev/urandom bs=512 count=1000 2>/dev/null | base64 > /tmp/yarn/CXaj; true
+            echo "phase-feat-2656=$(wc -c </tmp/yarn/CXaj)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'CXaj'
+  feat-2656:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/CXaj 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  my_pop_key:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: TEST ONLY RESIZE
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; sed -n 's/^\(MemTotal\):\s*/\1 /p' /proc/meminfo | sort -n | tail -n 3; true ; } > /tmp/yarn/scratch_0c92f0c8
+            echo "phase-v3-canary=$(wc -c </tmp/yarn/scratch_0c92f0c8)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'scratch_0c92f0c8'
+  v3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/scratch_0c92f0c8 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  gradient_kernel_fill_balloon:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Recognise the load profile straight away
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; cp /etc/os-release '/tmp/kitchen_receipt.copy' && sed -i.orig 's/"//g' '/tmp/kitchen_receipt.copy' && cat '/tmp/kitchen_receipt.copy'; true ; } > /tmp/yarn/1wVAFfSmz7s6OhY884d8P
+            echo "phase-ivan-ci=$(wc -c </tmp/yarn/1wVAFfSmz7s6OhY884d8P)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - '1wVAFfSmz7s6OhY884d8P'
+  ivan-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/1wVAFfSmz7s6OhY884d8P 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  cell__caption:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: We power cycle the GPIO pins first
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; case $(date +%u) in [1-5]) echo weekday ;; *) echo weekend ;; esac; true ; } > /tmp/yarn/draft.log.18
+            echo "phase-v7-nightly3=$(wc -c </tmp/yarn/draft.log.18)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'draft.log.18'
+  v7-nightly3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/draft.log.18 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  ICON_DEFER_SCENE_DRAIN_BACK:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Starting lineup provisioning
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; echo 'Hello there' | tee "/tmp/onion-ruby-crimson.md"; true ; } > /tmp/yarn/INV-2023-28533
+            echo "phase-BuildRelease=$(wc -c </tmp/yarn/INV-2023-28533)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'INV-2023-28533'
+  BuildRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/INV-2023-28533 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  deep_sage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Badge the offer letters week one
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; sort -k3,3 -n -t : /etc/passwd | cut -d':' -f1; true ; } > /tmp/yarn/Shimmer
+            echo "phase-green-light=$(wc -c </tmp/yarn/Shimmer)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'Shimmer'
+  green-light:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/Shimmer 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  init6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Why thumbnail the timeline
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; echo 'take out the trash' | base64; true ; } > /tmp/yarn/TICKET-23722-NS
+            echo "phase-preview=$(wc -c </tmp/yarn/TICKET-23722-NS)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'TICKET-23722-NS'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/TICKET-23722-NS 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  MIN_DRIVER_LEN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Route the fume hood through Oslo
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; fallocate -l 2M '/tmp/snakedocs.md' && ls -lh '/tmp/snakedocs.md'; true ; } > /tmp/yarn/aGz
+            echo "phase-bake-it=$(wc -c </tmp/yarn/aGz)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'aGz'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/aGz 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  gamma_err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Ledger settled ok
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; for entry in $(seq 1 9); do echo "$entry squared is $((entry**2))"; done | sort -r; true ; } > /tmp/yarn/GPU.indigo
+            echo "phase-Verify_Service4=$(wc -c </tmp/yarn/GPU.indigo)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'GPU.indigo'
+  Verify_Service4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/GPU.indigo 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  animate_alive_future:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Stop encoding the timeline
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 1 -type f -name 'limits' -exec basename {} \;; true ; } > /tmp/yarn/west_draft_sweep_velvet
+            echo "phase-dotnet8-cov=$(wc -c </tmp/yarn/west_draft_sweep_velvet)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'west_draft_sweep_velvet'
+  dotnet8-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/west_draft_sweep_velvet 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  needs_box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Hover The Back Button Stage
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; grep -R umask /etc/skel | tail -n 10; true ; } > /tmp/yarn/CluSTeRsERvEr
+            echo "phase-may28-rev=$(wc -c </tmp/yarn/CluSTeRsERvEr)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'CluSTeRsERvEr'
+  may28-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/CluSTeRsERvEr 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  drympthuengapp:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: tag timeline maybe
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; cat /etc/shells | awk -F/ '{ print $NF }' | sort; true ; } > /tmp/yarn/viol37.lynx
+            echo "phase-dotnet8-bench=$(wc -c </tmp/yarn/viol37.lynx)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'viol37.lynx'
+  dotnet8-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/viol37.lynx 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  o-item:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Stop offboarding the leave requests
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; touch "/tmp/meeting-diary-new.tmp" && cp "/tmp/meeting-diary-new.tmp"{,.bak} && ls "/tmp/meeting-diary-new.tmp"*; true ; } > /tmp/yarn/YDn
+            echo "phase-v9-preview=$(wc -c </tmp/yarn/YDn)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'YDn'
+  v9-preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/YDn 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  PatternEnum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: ngl diff the perf baseline
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; tar -czf /tmp/cak6.tgz -C /etc hosts group shells && mkdir -p '/tmp/pr22018-04-08' && tar -xzf /tmp/cak6.tgz -C '/tmp/pr22018-04-08' && ls -R '/tmp/pr22018-04-08'; true ; } > /tmp/yarn/VID_00091832
+            echo "phase-rigel-beta=$(wc -c </tmp/yarn/VID_00091832)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'VID_00091832'
+  rigel-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/VID_00091832 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  COUPON_SHIPMENT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Execute promotion
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; cat /etc/group |grep disk |awk -F: '{print $1}'; true ; } > /tmp/yarn/drIVERPhOTOnLOaDeROTtER
+            echo "phase-produce-staging-release-candidate=$(wc -c </tmp/yarn/drIVERPhOTOnLOaDeROTtER)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'drIVERPhOTOnLOaDeROTtER'
+  produce-staging-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/drIVERPhOTOnLOaDeROTtER 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  AESUnion:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Ok to encrypt the secrets
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; for x in lemon plum banana mango; do printf '%-8s %d\n' "$x" ${#x}; done | head -n3; true ; } > /tmp/yarn/c0ba17frozen
+            echo "phase-brodcast=$(wc -c </tmp/yarn/c0ba17frozen)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'c0ba17frozen'
+  brodcast:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/c0ba17frozen 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  TextureKind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Dice the config files
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; str="retrying in 5 seconds"; echo "$str" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/yarn/2BC
+            echo "phase-Ship_Tests8=$(wc -c </tmp/yarn/2BC)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - '2BC'
+  Ship_Tests8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/2BC 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  span-90:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: While we can collect the late fees
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; printf '%s\n' icon bee swan sync signal sprint match | grep -v '^[a-m]' | tac; true ; } > /tmp/yarn/crc_e58ea2dddd1c4
+            echo "phase-uniform=$(wc -c </tmp/yarn/crc_e58ea2dddd1c4)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'crc_e58ea2dddd1c4'
+  uniform:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/crc_e58ea2dddd1c4 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  recomend_factory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: If the seating plan is down carry on
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; grep -r alias /etc/skel | head -n 20; true ; } > /tmp/yarn/t0k3n_pe3r_amb3r
+            echo "phase-fix-parse=$(wc -c </tmp/yarn/t0k3n_pe3r_amb3r)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 't0k3n_pe3r_amb3r'
+  fix-parse:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/t0k3n_pe3r_amb3r 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  d2uv7j:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: BIZ 840
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,fig,7,6.65\n2,pear,18,83.21\n3,cherry,9,15.68\n4,grape,19,9.93\n' >${TMPDIR:-/tmp}/packetWarning.dat && awk -F, 'NR>1' ${TMPDIR:-/tmp}/packetWarning.dat | wc -l; true ; } > /tmp/yarn/silent_dat.Pulse
+            echo "phase-rip-it=$(wc -c </tmp/yarn/silent_dat.Pulse)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'silent_dat.Pulse'
+  rip-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/silent_dat.Pulse 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  TTTTT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Go survey the welcome kits
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; awk '{printf "%3d %s\n", NR, $0}' /etc/shells | head -n2; true ; } > /tmp/yarn/Ae1t
+            echo "phase-verify-partial-test-matrix=$(wc -c </tmp/yarn/Ae1t)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'Ae1t'
+  verify-partial-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/Ae1t 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  ch45:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Pick The Fragile Items By Noon
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; grep -m4 nobody /etc/passwd | awk -F: '{print $1}'; true ; } > /tmp/yarn/greenNoiseKappaCloud
+            echo "phase-delta-1=$(wc -c </tmp/yarn/greenNoiseKappaCloud)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'greenNoiseKappaCloud'
+  delta-1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/greenNoiseKappaCloud 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  test_477:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Review the open invoices for audit
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; rev ~/.bashrc | wc -l; true ; } > /tmp/yarn/cfg.doc.env
+            echo "phase-py311-cov=$(wc -c </tmp/yarn/cfg.doc.env)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'cfg.doc.env'
+  py311-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/cfg.doc.env 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  ryo42:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Skybox patch for tomorrow
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; truncate -s 100K "/tmp/potatopaymentgroup.list" && du -h --apparent-size "/tmp/potatopaymentgroup.list"; true ; } > /tmp/yarn/PXL00057416
+            echo "phase-pr-alt=$(wc -c </tmp/yarn/PXL00057416)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'PXL00057416'
+  pr-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/PXL00057416 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  DEBUG__BODY_RIGHT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Beta crawl gate
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; touch "/var/tmp/shard-teal.dat" && rm -v "/var/tmp/shard-teal.dat"; true ; } > /tmp/yarn/ccQDwyVh
+            echo "phase-hotfix-1826=$(wc -c </tmp/yarn/ccQDwyVh)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'ccQDwyVh'
+  hotfix-1826:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/ccQDwyVh 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  shortCb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Excuse the wait
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; sort /etc/login.defs | wc -l; true ; } > /tmp/yarn/sweep
+            echo "phase-java17-build=$(wc -c </tmp/yarn/sweep)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'sweep'
+  java17-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/sweep 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  cloak792:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Culturing each night
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; grep -w --context=3 '^#' /etc/resolv.conf | sort | uniq -c; true ; } > /tmp/yarn/moor709
+            echo "phase-go1-21-lint=$(wc -c </tmp/yarn/moor709)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'moor709'
+  go1-21-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/moor709 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  Victor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: UNLOAD THE RETURNS BIN TO BAY 12
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; for x in $(seq 1 6); do printf '%02d\n' "${x}"; done|sort -r; true ; } > /tmp/yarn/mothChromeWillowSprite
+            echo "phase-build-nightly-artifact-bundle=$(wc -c </tmp/yarn/mothChromeWillowSprite)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'mothChromeWillowSprite'
+  build-nightly-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/mothChromeWillowSprite 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  amber_rgb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Text the incident channel within 6 min
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; diff <(echo 'changes saved') <(echo 'are we there yet?') || echo differ; true ; } > /tmp/yarn/shader-peer-grove
+            echo "phase-Ship_Suite9=$(wc -c </tmp/yarn/shader-peer-grove)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'shader-peer-grove'
+  Ship_Suite9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/shader-peer-grove 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+  y13ld:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Defend the benefits enrollment
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -mindepth 1 -name '*' -size +100k -exec basename {} \; 2>/dev/null | sort; true ; } > /tmp/yarn/Frame.11_5cd97.Lagoon
+            echo "phase-ValidatePipeline=$(wc -c </tmp/yarn/Frame.11_5cd97.Lagoon)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'Frame.11_5cd97.Lagoon'
+  ValidatePipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Load step-3 output
+          command: |
+            cat /tmp/yarn/Frame.11_5cd97.Lagoon 2>/dev/null | tee >(wc -l) > /dev/null || true
+      - run:
+          name: Materialize tree
+          command: git clone --depth 3 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: tar --extract --bzip2 --file=dev-cache-v5.tar.bz2
+      - run:
+          name: Store metadata
+          command: sleep 45
+      - run:
+          command: "./ward-driver"
+
+  hg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: In parallel zoom the share sheet
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; gzip -c /etc/group >"/var/tmp/guide-otter-station-new.gz" && gunzip -c "/var/tmp/guide-otter-station-new.gz" | wc -l; true ; } > /tmp/yarn/silent_dat.Pulse
+            echo "phase-rip-it=$(wc -c </tmp/yarn/silent_dat.Pulse)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'silent_dat.Pulse'
+  sprint_23062002:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Sweep the landing page
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; printf 'x\n' | tee '/tmp/my-goal.md' >/dev/null; cat '/tmp/my-goal.md'; true ; } > /tmp/yarn/GPU.indigo
+            echo "phase-Verify_Service4=$(wc -c </tmp/yarn/GPU.indigo)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'GPU.indigo'
+  CastleV10:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Verify the login attempts while we can
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; ls -hRd /sys/class/net | wc -l; true ; } > /tmp/yarn/YDn
+            echo "phase-v9-preview=$(wc -c </tmp/yarn/YDn)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'YDn'
+  ms_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Weigh samples and wait
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; echo 'step 2 of 5' >/tmp/my_lesson_lib.tmp && du -h /tmp/my_lesson_lib.tmp; true ; } > /tmp/yarn/ccQDwyVh
+            echo "phase-hotfix-1826=$(wc -c </tmp/yarn/ccQDwyVh)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'ccQDwyVh'
+  PriceOpt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: What about the backlog
+          command: |
+            mkdir -p /tmp/yarn
+            set +o pipefail 2>/dev/null; dd if=/dev/urandom bs=512 count=1000 2>/dev/null | base64 > /tmp/yarn/CXaj; true
+            echo "phase-feat-2656=$(wc -c </tmp/yarn/CXaj)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'CXaj'
+  comment_cli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Dry Centrifuge Rotor Step
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; getent group | sort -t : -k3,3 -n | sed 's/:.*//'; true ; } > /tmp/yarn/cfg.doc.env
+            echo "phase-py311-cov=$(wc -c </tmp/yarn/cfg.doc.env)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'cfg.doc.env'
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: sensor array inspection fresh
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | grep -h 'cpu cores' | nl; true ; } > /tmp/yarn/aGz
+            echo "phase-bake-it=$(wc -c </tmp/yarn/aGz)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'aGz'
+  dfghjkbnm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: SUP 543 backfill
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; for word in panda zebra cat seal frog; do printf '%s\n' "$word"; done; true ; } > /tmp/yarn/c0ba17frozen
+            echo "phase-brodcast=$(wc -c </tmp/yarn/c0ba17frozen)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'c0ba17frozen'
+  UTF8v7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: INC mini map
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; printf 'red\t99\nseed\t50\nbridge\t62\neagle\t53\n' >"/tmp/garage_0427.tsv" && cut -f1 "/tmp/garage_0427.tsv"; true ; } > /tmp/yarn/sweep
+            echo "phase-java17-build=$(wc -c </tmp/yarn/sweep)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'sweep'
+  Theta_j:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Cleared for open
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; echo -n 'bump version' | sha384sum; true ; } > /tmp/yarn/scratch_0c92f0c8
+            echo "phase-v3-canary=$(wc -c </tmp/yarn/scratch_0c92f0c8)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'scratch_0c92f0c8'
+  t18g58h4qdqaanpu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Beat 013 post petty cash
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >${TMPDIR:-/tmp}/dolphin.gz && zcat ${TMPDIR:-/tmp}/dolphin.gz | head --lines=3; true ; } > /tmp/yarn/2BC
+            echo "phase-Ship_Tests8=$(wc -c </tmp/yarn/2BC)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - '2BC'
+  Price2SVM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Focus the dropdown and type
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 3 -type d -name 'default' -atime -1 -exec stat -c %n '{}' ';' 2> /dev/null | sort | head -n 10; true ; } > /tmp/yarn/Frame.11_5cd97.Lagoon
+            echo "phase-ValidatePipeline=$(wc -c </tmp/yarn/Frame.11_5cd97.Lagoon)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'Frame.11_5cd97.Lagoon'
+  PUT-clients:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Max 500 retries for captioning
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; grep -r --with-filename shell /etc/skel | tail -6; true ; } > /tmp/yarn/VID_00091832
+            echo "phase-rigel-beta=$(wc -c </tmp/yarn/VID_00091832)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'VID_00091832'
+  DelegatingBufferProcessor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: optimization milestone 36
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; sha256sum "$HOME/.bashrc" >/tmp/night_result.sha256 && sha256sum -c /tmp/night_result.sha256; true ; } > /tmp/yarn/t0k3n_pe3r_amb3r
+            echo "phase-fix-parse=$(wc -c </tmp/yarn/t0k3n_pe3r_amb3r)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 't0k3n_pe3r_amb3r'
+  AES_Scene:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: checkpoint for the serving endpoint
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; for entry in apple temp main message trip; do echo "item: $entry";done|sort -r; true ; } > /tmp/yarn/shader-peer-grove
+            echo "phase-Ship_Suite9=$(wc -c </tmp/yarn/shader-peer-grove)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'shader-peer-grove'
+  cherry-trace-scope:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: archive 2025 backup battery
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; printf %s 'first, second and third' | sha1sum | awk '{print $1}'; true ; } > /tmp/yarn/Shimmer
+            echo "phase-green-light=$(wc -c </tmp/yarn/Shimmer)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'Shimmer'
+  dumpCountForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yarn
+      - run:
+          name: Halt verification
+          command: |
+            mkdir -p /tmp/yarn
+            { set +o pipefail 2>/dev/null; getent passwd | awk -F ":" '{ print $3 }' | sort -rn | awk '$1 % 2 == 0' | xargs; true ; } > /tmp/yarn/drIVERPhOTOnLOaDeROTtER
+            echo "phase-produce-staging-release-candidate=$(wc -c </tmp/yarn/drIVERPhOTOnLOaDeROTtER)"
+      - persist_to_workspace:
+          root: /tmp/yarn
+          paths:
+            - 'drIVERPhOTOnLOaDeROTtER'
+workflows:
+  matrix:
+    jobs:
+      - d2uv7j
+      - hg:
+          requires:
+            - d2uv7j
+      - rip-it:
+          requires:
+            - hg
+      - gamma_err:
+          requires:
+            - hg
+      - sprint_23062002:
+          requires:
+            - gamma_err
+      - Verify_Service4:
+          requires:
+            - sprint_23062002
+      - o-item:
+          requires:
+            - sprint_23062002
+      - CastleV10:
+          requires:
+            - o-item
+      - v9-preview:
+          requires:
+            - CastleV10
+      - DEBUG__BODY_RIGHT:
+          requires:
+            - CastleV10
+      - ms_arg:
+          requires:
+            - DEBUG__BODY_RIGHT
+      - hotfix-1826:
+          requires:
+            - ms_arg
+      - namespaceStr:
+          requires:
+            - ms_arg
+      - PriceOpt:
+          requires:
+            - namespaceStr
+      - feat-2656:
+          requires:
+            - PriceOpt
+      - test_477:
+          requires:
+            - PriceOpt
+      - comment_cli:
+          requires:
+            - test_477
+      - py311-cov:
+          requires:
+            - comment_cli
+      - MIN_DRIVER_LEN:
+          requires:
+            - comment_cli
+      - skipEmailTaxAlias:
+          requires:
+            - MIN_DRIVER_LEN
+      - bake-it:
+          requires:
+            - skipEmailTaxAlias
+      - AESUnion:
+          requires:
+            - skipEmailTaxAlias
+      - dfghjkbnm:
+          requires:
+            - AESUnion
+      - brodcast:
+          requires:
+            - dfghjkbnm
+      - gradient_kernel_fill_balloon
+      - ivan-ci:
+          requires:
+            - gradient_kernel_fill_balloon
+      - drympthuengapp:
+          requires:
+            - gradient_kernel_fill_balloon
+      - dotnet8-bench:
+          requires:
+            - drympthuengapp
+      - TTTTT:
+          requires:
+            - drympthuengapp
+      - verify-partial-test-matrix:
+          requires:
+            - TTTTT
+      - Victor:
+          requires:
+            - TTTTT
+      - build-nightly-artifact-bundle:
+          requires:
+            - Victor
+      - span-90:
+          requires:
+            - Victor
+      - uniform:
+          requires:
+            - span-90
+      - cell__caption:
+          requires:
+            - span-90
+      - v7-nightly3:
+          requires:
+            - cell__caption
+      - ryo42:
+          requires:
+            - cell__caption
+      - pr-alt:
+          requires:
+            - ryo42
+      - cloak792:
+          requires:
+            - ryo42
+      - go1-21-lint:
+          requires:
+            - cloak792
+      - shortCb
+      - UTF8v7:
+          requires:
+            - shortCb
+      - java17-build:
+          requires:
+            - UTF8v7
+      - my_pop_key:
+          requires:
+            - UTF8v7
+      - Theta_j:
+          requires:
+            - my_pop_key
+      - v3-canary:
+          requires:
+            - Theta_j
+      - TextureKind:
+          requires:
+            - Theta_j
+      - t18g58h4qdqaanpu:
+          requires:
+            - TextureKind
+      - Ship_Tests8:
+          requires:
+            - t18g58h4qdqaanpu
+      - y13ld:
+          requires:
+            - t18g58h4qdqaanpu
+      - Price2SVM:
+          requires:
+            - y13ld
+      - ValidatePipeline:
+          requires:
+            - Price2SVM
+      - PatternEnum:
+          requires:
+            - Price2SVM
+      - PUT-clients:
+          requires:
+            - PatternEnum
+      - rigel-beta:
+          requires:
+            - PUT-clients
+      - recomend_factory:
+          requires:
+            - PUT-clients
+      - DelegatingBufferProcessor:
+          requires:
+            - recomend_factory
+      - fix-parse:
+          requires:
+            - DelegatingBufferProcessor
+      - amber_rgb:
+          requires:
+            - DelegatingBufferProcessor
+      - AES_Scene:
+          requires:
+            - amber_rgb
+      - Ship_Suite9:
+          requires:
+            - AES_Scene
+      - deep_sage:
+          requires:
+            - AES_Scene
+      - cherry-trace-scope:
+          requires:
+            - deep_sage
+      - green-light:
+          requires:
+            - cherry-trace-scope
+      - COUPON_SHIPMENT:
+          requires:
+            - cherry-trace-scope
+      - dumpCountForKey:
+          requires:
+            - COUPON_SHIPMENT
+      - produce-staging-release-candidate:
+          requires:
+            - dumpCountForKey
+      - ch45
+      - delta-1:
+          requires:
+            - ch45
+      - ICON_DEFER_SCENE_DRAIN_BACK:
+          requires:
+            - ch45
+      - BuildRelease:
+          requires:
+            - ICON_DEFER_SCENE_DRAIN_BACK
+      - init6:
+          requires:
+            - ICON_DEFER_SCENE_DRAIN_BACK
+      - preview:
+          requires:
+            - init6
+      - animate_alive_future:
+          requires:
+            - init6
+      - dotnet8-cov:
+          requires:
+            - animate_alive_future
+      - needs_box:
+          requires:
+            - animate_alive_future
+      - may28-rev:
+          requires:
+            - needs_box
